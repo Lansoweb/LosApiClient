@@ -1,0 +1,18 @@
+<?php
+return [
+    'los_api_client' => [
+        'uri' => 'http://localhost:8000',
+        'headers' => [
+            //'Accept'       => 'application/hal+json',
+            //'Content-Type' => 'application/json',
+        ],
+        'http_client' => [
+            'options' => [
+                //'timeout'       => 60,
+                //'sslverifypeer' => false,
+                //'keepalive'     => true,
+                //'adapter'       => 'Zend\Http\Client\Adapter\Socket',
+            ],
+        ],
+    ],
+];

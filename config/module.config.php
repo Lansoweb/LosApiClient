@@ -8,13 +8,13 @@ return [
             LosApiClient\Api\Client::class => LosApiClient\Api\ClientFactory::class
         ]
     ],
-    'los-api-client' => [
+    'los_api_client' => [
         'uri' => 'http://localhost:8000',
         'headers' => array(
             'Accept' => 'application/hal+json',
             'Content-Type' => 'application/json'
         ),
-        'http-client' => [
+        'http_client' => [
             'options' => []
         ]
     ]
