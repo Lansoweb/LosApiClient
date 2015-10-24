@@ -7,5 +7,4 @@ nbproject
 .project
 .settings
 vendor
-data/cache/*
-!data/cache/.gitkeep
+/composer.lock

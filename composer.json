@@ -5,15 +5,13 @@
     "php" : ">=5.6",
     "ext-json" : "*",
     "ext-mbstring" : "*",
-    "zendframework/zendframework" : ">=2.3,<3.0.0",
-    "nocarrier/hal" : "dev-master"
+    "nocarrier/hal" : "~0.9",
+    "zendframework/zend-modulemanager" : "~2.6",
+    "zendframework/zend-http" : "~2.4",
+    "zendframework/zend-servicemanager" : "2.6"
   },
   "require-dev" : {
-    "satooshi/php-coveralls": "dev-master"
-  },
-  "suggest": {
-    "los/losbase": "los/losbase for some abstract classes to speed development ",
-    "los/loslog": "los/loslog for logging"
+    "satooshi/php-coveralls" : "dev-master"
   },
   "license" : "BSD-3-Clause",
   "keywords" : [ "api", "rest", "client", "zf2", "hal" ],
@@ -22,6 +20,10 @@
       "LosApiClient\\" : "src/"
     },
     "classmap" : [ "./" ]
+  },
+  "suggest" : {
+    "los/losbase" : "los/losbase for some abstract classes to speed development ",
+    "los/loslog" : "los/loslog for logging"
   },
   "type" : "library",
   "support" : {
