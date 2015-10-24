@@ -19,7 +19,7 @@
   "keywords" : [ "api", "rest", "client", "zf2", "hal" ],
   "autoload" : {
     "psr-4" : {
-      "LosApiClient" : "src/"
+      "LosApiClient\\" : "src/"
     },
     "classmap" : [ "./" ]
   },
