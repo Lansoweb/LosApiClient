@@ -6,9 +6,9 @@
     "ext-json" : "*",
     "ext-mbstring" : "*",
     "nocarrier/hal" : "~0.9",
-    "zendframework/zend-modulemanager" : "~2.6",
+    "zendframework/zend-modulemanager" : "~2.5",
     "zendframework/zend-http" : "~2.4",
-    "zendframework/zend-servicemanager" : "2.6"
+    "zendframework/zend-servicemanager" : "~2.5"
   },
   "require-dev" : {
     "satooshi/php-coveralls" : "dev-master"
