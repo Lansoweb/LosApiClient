@@ -29,7 +29,8 @@ For more information about the http-client options, please check the official do
 
 ```php
 'los_api_client' => [
-    'uri' => 'https://localhost:8888',
+    'uri' => 'https://localhost:8000',
+    'depth' => 0,
     'http_client' => [
         'options' => [
             'timeout'       => 60,
@@ -65,6 +66,10 @@ $data = $ret->getData(false);
 ```php
 /* @var \LosApiClient\Api\Client $client */
 $client = $this->getServiceLocator()->get('los.api.client');
+
+// Setting depth of _embedded resources to 10
+$client->setDepth(10);
+
 /* @var \LosApiClient\Resource\Resource $ret */
 $ret = $client->get('/album',['year' => 2015]);
 

@@ -34,7 +34,7 @@ final class Response
      * @param Zend\Http\Client $client
      * @param Zend\Http\Response $response
      */
-    public function __construct(ZendHttpClient $client, ZendHttpResponse $response)
+    public function __construct(ZendHttpClient $client, ZendHttpResponse $response, $depth = 0)
     {
         $this->httpClient = $client;
         $this->httpResponse = $response;
@@ -50,9 +50,9 @@ final class Response
             ->getFieldValue();
 
         if ($contentType == 'application/hal+json') {
-            $this->content = new Resource(Hal::fromJson($this->httpResponse->getBody(),100));
+            $this->content = new Resource(Hal::fromJson($this->httpResponse->getBody(), $depth));
         } elseif ($contentType == 'application/hal+xml') {
-            $this->content = new Resource(Hal::fromXml($this->httpResponse->getBody(),100));
+            $this->content = new Resource(Hal::fromXml($this->httpResponse->getBody(), $depth));
         } else {
             throw new RuntimeException("Invalid content type during for response: $contentType.");
         }

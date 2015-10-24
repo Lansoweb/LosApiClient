@@ -2,6 +2,7 @@
 return [
     'los_api_client' => [
         'uri' => 'http://localhost:8000',
+        'depth' => 0,
         'headers' => [
             //'Accept'       => 'application/hal+json',
             //'Content-Type' => 'application/json',

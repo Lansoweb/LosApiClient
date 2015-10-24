@@ -17,11 +17,20 @@ final class Client
      */
     private $zendClient;
 
-    public function __construct(ZendHttpClient $client = null)
+    /**
+     * Depth to generate the response from the _embedded resources
+     *
+     * @var int
+     */
+    private $depth;
+
+    public function __construct(ZendHttpClient $client = null, $depth = 0)
     {
         $client = ($client instanceof ZendHttpClient) ? $client : new ZendHttpClient();
 
         $this->setZendClient($client);
+
+        $this->depth = (int) $depth;
     }
 
     public function setZendClient(ZendHttpClient $client)
@@ -62,7 +71,7 @@ final class Client
         $zendHttpResponse = $this->zendClient->send();
 
         try {
-            $response = new Response($this->zendClient, $zendHttpResponse);
+            $response = new Response($this->zendClient, $zendHttpResponse, $this->depth);
             $content = $response->getContent();
         } catch (ZendHttpRuntimeException $e) {
 	    throw $e;
@@ -109,5 +118,17 @@ final class Client
 
         return $this->doRequest($path, $headers);
     }
+
+    public function getDepth()
+    {
+        return $this->depth;
+    }
+
+    public function setDepth($depth)
+    {
+        $this->depth = (int) $depth;
+        return $this;
+    }
+
 
 }

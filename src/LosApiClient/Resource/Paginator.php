@@ -9,16 +9,16 @@ final class Paginator
     const TOTAL_ITEMS = 'total_items';
     const PAGE        = 'page';
 
-    private $pageSize   = 0;
-    private $pageCount  = 0;
+    private $pageSize   = 1;
+    private $pageCount  = 1;
     private $totalItems = 0;
     private $page       = 1;
 
     public function __construct(array $data = null)
     {
         if (! empty($data)) {
-            $this->pageCount  = (int) array_key_exists(self::PAGE_COUNT, $data) ? $data[self::PAGE_COUNT] : 0;
-            $this->pageSize   = (int) array_key_exists(self::PAGE_SIZE, $data) ? $data[self::PAGE_SIZE] : 0;
+            $this->pageCount  = (int) array_key_exists(self::PAGE_COUNT, $data) ? $data[self::PAGE_COUNT] : 1;
+            $this->pageSize   = (int) array_key_exists(self::PAGE_SIZE, $data) ? $data[self::PAGE_SIZE] : 1;
             $this->totalItems = (int) array_key_exists(self::TOTAL_ITEMS, $data) ? $data[self::TOTAL_ITEMS] : 0;
             $this->page       = (int) array_key_exists(self::PAGE, $data) ? $data[self::PAGE] : 1;
         }
