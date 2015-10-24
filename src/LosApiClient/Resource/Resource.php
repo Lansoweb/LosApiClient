@@ -2,6 +2,7 @@
 namespace LosApiClient\Resource;
 
 use Nocarrier\Hal;
+use LosApiClient\Exception\InvalidArgumentException;
 
 class Resource
 {
@@ -54,9 +55,36 @@ class Resource
         return (bool) ($this->paginator->getPageSize() > 0);
     }
 
-    public function getData()
+    public function getData($includeResources = true)
     {
-        return $this->hal->getData();
+        return array_merge($this->hal->getData(), $this->getResources());
+    }
+
+    public function getFirstResource($rel)
+    {
+        $resource = $this->hal->getFirstResource($rel);
+        if ($resource === null) {
+            throw new InvalidArgumentException("Rel '$rel' not found.");
+        }
+        return $resource->getData();
+    }
+
+    public function getResources($filterRel = null)
+    {
+        $rels = $this->hal->getResources();
+        $result = [];
+        foreach ($rels as $rel => $resources) {
+            if ($filterRel !== null && $rel != $filterRel) {
+                continue;
+            }
+            foreach ($resources as $resource) {
+                $result[$rel][] = $resource->getData();
+            }
+        }
+        if ($filterRel !== null && array_key_exists($filterRel, $result)) {
+            return $result[$filterRel];
+        }
+        return $result;
     }
 
 }
