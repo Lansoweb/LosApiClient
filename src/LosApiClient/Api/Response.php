@@ -50,9 +50,9 @@ final class Response
             ->getFieldValue();
 
         if ($contentType == 'application/hal+json') {
-            $this->content = new Resource(Hal::fromJson($this->httpResponse->getBody()));
+            $this->content = new Resource(Hal::fromJson($this->httpResponse->getBody(),100));
         } elseif ($contentType == 'application/hal+xml') {
-            $this->content = new Resource(Hal::fromXml($this->httpResponse->getBody()));
+            $this->content = new Resource(Hal::fromXml($this->httpResponse->getBody(),100));
         } else {
             throw new RuntimeException("Invalid content type during for response: $contentType.");
         }
