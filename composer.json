@@ -1,0 +1,40 @@
+{
+  "name" : "los/los-api-client",
+  "description" : "REST API Client using Hal",
+  "require" : {
+    "php" : ">=5.6",
+    "ext-json" : "*",
+    "ext-mbstring" : "*",
+    "zendframework/zendframework" : ">=2.3,<3.0.0",
+    "nocarrier/hal" : "dev-master"
+  },
+  "require-dev" : {
+    "satooshi/php-coveralls": "dev-master"
+  },
+  "suggest": {
+    "los/losbase": "los/losbase for some abstract classes to speed development ",
+    "los/loslog": "los/loslog for logging"
+  },
+  "license" : "BSD-3-Clause",
+  "keywords" : [ "api", "rest", "client", "zf2", "hal" ],
+  "autoload" : {
+    "psr-4" : {
+      "LosApiClient" : "src/"
+    },
+    "classmap" : [ "./" ]
+  },
+  "type" : "library",
+  "support" : {
+    "email" : "leandro@leandrosilva.info",
+    "source" : "https://github.com/LansoWeb/LosApiClient",
+    "issues" : "https://github.com/LansoWeb/LosApiClient/issues"
+  },
+  "config" : {
+    "process-timeout" : 5000
+  },
+  "homepage" : "https://github.com/LansoWeb/LosApiClient",
+  "authors" : [ {
+    "name" : "Leandro Silva",
+    "email" : "leandro@leandrosilva.info"
+  } ]
+}
