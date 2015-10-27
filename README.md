@@ -4,6 +4,8 @@
 
 LosApiClient is a library to consume Restful APIs using Hal (json or xml) like [Apigility](http://apigility.org).
 
+Can be used with ZendFramework 2 and Zend-Expressive.
+
 ## Requirements
 
 * PHP >= 5.6
