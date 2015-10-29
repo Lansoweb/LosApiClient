@@ -49,7 +49,12 @@ final class Response
             ->get('Content-Type')
             ->getFieldValue();
 
-        if ($contentType == 'application/hal+json') {
+        $pos = strpos($contentType, ';');
+        if ($pos !== false) {
+            $contentType = substr($contentType, 0, $pos);
+        }
+
+        if ($contentType == 'application/hal+json' || $contentType == 'application/json') {
             $this->content = new Resource(Hal::fromJson($this->httpResponse->getBody(), $depth));
         } elseif ($contentType == 'application/hal+xml') {
             $this->content = new Resource(Hal::fromXml($this->httpResponse->getBody(), $depth));
