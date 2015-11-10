@@ -3,6 +3,9 @@ namespace LosApiClient;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 
+/**
+ * @codeCoverageIgnore
+ */
 class Module implements AutoloaderProviderInterface
 {
 

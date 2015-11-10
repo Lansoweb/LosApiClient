@@ -56,7 +56,7 @@ final class Response
 
         if ($contentType == 'application/hal+json' || $contentType == 'application/json') {
             $this->content = new Resource(Hal::fromJson($this->httpResponse->getBody(), $depth));
-        } elseif ($contentType == 'application/hal+xml') {
+        } elseif ($contentType == 'application/hal+xml' || $contentType == 'application/xml') {
             $this->content = new Resource(Hal::fromXml($this->httpResponse->getBody(), $depth));
         } else {
             throw new RuntimeException("Invalid content type during for response: $contentType.");

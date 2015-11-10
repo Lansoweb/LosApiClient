@@ -17,7 +17,7 @@ class Resource
         $this->setPaginator($resource->getData());
     }
 
-    private function setUri($uri)
+    public function setUri($uri)
     {
         $this->hal->setUri($uri);
         return $this;
@@ -38,7 +38,7 @@ class Resource
         return $this->hal->getLink($rel);
     }
 
-    private function setPaginator(array $input)
+    public function setPaginator(array $input)
     {
         $this->paginator = new Paginator($input);
 

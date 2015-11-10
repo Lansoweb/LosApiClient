@@ -81,7 +81,7 @@ final class Paginator
 
     public function getNextPage()
     {
-        return $this->page++;
+        return ++$this->page;
     }
 
 }
