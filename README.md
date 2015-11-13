@@ -4,7 +4,7 @@
 
 LosApiClient is a library to consume Restful APIs using Hal (json or xml) like [Apigility](http://apigility.org).
 
-Can be used with ZendFramework 2 and Zend-Expressive.
+Can be used with pure PHP or any PHP framework, like ZendFramework 2 and Zend-Expressive. 
 
 ## Requirements
 
@@ -23,6 +23,8 @@ php composer.phar require los/los-api-client
 
 ### Configuration
 You need to configure at least the Api URI.
+
+If using a framework that implements `container-interopt`, you can use the following configuration:
 
 Copy the los-api-client.global.php.dist from this module to your application's config folder and make the necessary changes.
 
@@ -49,6 +51,43 @@ For more information about the http-client options, please check the official do
 ```
 
 ## Usage
+
+### Creating the client
+You can use the `LosApiClient\Api\ClientFactory` usign the above configuration or manually:
+```php
+$httpClient = new Zend\Http\Client('http://127.0.0.1', []);
+$client = new LosapiClient\Apt\Client($httpClient, 10);
+```
+
+## Injecting a Cerberus Circuit Breaker
+You can use the client with a circuit breaker to control failures and success and avoid uncessary attempts. 
+
+More information about cerberus on it's [own repository](https://github.com/mt-olympus/cerberus).
+
+```php
+$httpClient = new Zend\Http\Client('http://127.0.0.1', []);
+$storage = Zend\Cache\StorageFactory\StorageFactory::factory([
+            'adapter' => [
+                'name' => 'memory',
+                'options' => [
+                    'namespace' => 'my-service',
+                ],
+            ],
+            'plugins' => [
+                'exception_handler' => [
+                    'throw_exceptions' => false,
+                ],
+            ],
+        ]);
+$cerberus = new Cerberus($storage, 2, 2);
+
+// Create a new client
+$client = new LosapiClient\Apt\Client($httpClient, 10, $cerberus, 'my-service);
+
+// Or add it to a previously created client 
+$client->setCircuitBreaker($cerberus);
+$client->setServiceName('my-service');
+```
 
 ### Single resource
 ```php
