@@ -1,9 +1,9 @@
 <?php
+
 namespace LosApiClient\Api;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use LosApiClient\Api\Client;
 
 class ClientFactory implements FactoryInterface
 {

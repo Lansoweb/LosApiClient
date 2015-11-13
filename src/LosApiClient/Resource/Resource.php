@@ -1,4 +1,5 @@
 <?php
+
 namespace LosApiClient\Resource;
 
 use Nocarrier\Hal;
@@ -20,6 +21,7 @@ class Resource
     public function setUri($uri)
     {
         $this->hal->setUri($uri);
+
         return $this;
     }
 
@@ -66,6 +68,7 @@ class Resource
         if ($resource === null) {
             throw new InvalidArgumentException("Rel '$rel' not found.");
         }
+
         return $resource->getData();
     }
 
@@ -84,7 +87,7 @@ class Resource
         if ($filterRel !== null && array_key_exists($filterRel, $result)) {
             return $result[$filterRel];
         }
+
         return $result;
     }
-
 }

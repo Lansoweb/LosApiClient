@@ -1,4 +1,5 @@
 <?php
+
 namespace LosApiClient\Api;
 
 use Zend\Http\Client as ZendHttpClient;
@@ -9,29 +10,25 @@ use LosApiClient\Resource\Resource;
 
 final class Response
 {
-
     /**
-     *
      * @var Zend\Http\Client
      */
     private $httpClient;
 
     /**
-     *
      * @var Zend\Http\Response
      */
     private $httpResponse;
 
     /**
-     *
      * @var \LosApiClient\Resource\Resource
      */
     private $content;
 
     /**
-     * Construtor
+     * Construtor.
      *
-     * @param Zend\Http\Client $client
+     * @param Zend\Http\Client   $client
      * @param Zend\Http\Response $response
      */
     public function __construct(ZendHttpClient $client, ZendHttpResponse $response, $depth = 0)
@@ -39,7 +36,7 @@ final class Response
         $this->httpClient = $client;
         $this->httpResponse = $response;
 
-        if (! $this->httpResponse->isSuccess()) {
+        if (!$this->httpResponse->isSuccess()) {
             $error = json_decode($this->httpResponse->getBody());
 
             throw new RuntimeException(sprintf('Error "%s/%s": %s', $error->status, $error->title, $error->detail));
@@ -68,7 +65,7 @@ final class Response
     }
 
     /**
-     * Get the content
+     * Get the content.
      *
      * @return \LosApiClient\Resource\Resource
      */
@@ -76,5 +73,4 @@ final class Response
     {
         return $this->content;
     }
-
 }

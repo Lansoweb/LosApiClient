@@ -13,7 +13,8 @@
   "require-dev" : {
     "satooshi/php-coveralls" : "dev-master",
     "mt-olympus/cerberus" : "dev-master",
-    "phpunit/phpunit" : "~5.0"
+    "squizlabs/php_codesniffer" : "^2.3",
+    "phpunit/phpunit" : "~4.8"
   },
   "license" : "MIT",
   "keywords" : [ "api", "rest", "client", "zf2", "hal" ],

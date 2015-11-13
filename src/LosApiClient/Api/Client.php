@@ -1,15 +1,15 @@
 <?php
+
 namespace LosApiClient\Api;
 
-use Zend\Http\Client as ZendHttpClient,
-    Zend\Http\Exception\RuntimeException as ZendHttpRuntimeException;
+use Zend\Http\Client as ZendHttpClient;
+use Zend\Http\Exception\RuntimeException as ZendHttpRuntimeException;
 use Cerberus\CerberusInterface;
 use LosApiClient\Exception\NotAvailableException;
 use LosApiClient\Exception\RuntimeException;
 
 final class Client
 {
-
     /**
      * @const int Request timeout
      */
@@ -21,7 +21,7 @@ final class Client
     private $zendClient;
 
     /**
-     * Depth to generate the response from the _embedded resources
+     * Depth to generate the response from the _embedded resources.
      *
      * @var int
      */
@@ -31,8 +31,12 @@ final class Client
 
     private $serviceName;
 
-    public function __construct(ZendHttpClient $client = null, $depth = 0, CerberusInterface $circuitBreaker = null, $serviceName = null)
-    {
+    public function __construct(
+        ZendHttpClient $client = null,
+        $depth = 0,
+        CerberusInterface $circuitBreaker = null,
+        $serviceName = null
+    ) {
         $client = ($client instanceof ZendHttpClient) ? $client : new ZendHttpClient();
 
         $this->setZendClient($client);
@@ -57,7 +61,7 @@ final class Client
     }
 
     /**
-     * Get the Zend\Http\Client instance
+     * Get the Zend\Http\Client instance.
      *
      * @return Zend\Http\Client
      */
@@ -94,15 +98,15 @@ final class Client
     }
 
     /**
-     * Perform the request to api server
+     * Perform the request to api server.
      *
-     * @param String $path Example: "/v1/endpoint"
-     * @param Array $headers
+     * @param String $path    Example: "/v1/endpoint"
+     * @param Array  $headers
      */
-    private function doRequest($path, $headers = array())
+    private function doRequest($path, $headers = [])
     {
         if (!$this->isAvailable()) {
-            throw new NotAvailableException("Service not available.");
+            throw new NotAvailableException('Service not available.');
         }
 
         $this->zendClient->getUri()->setPath($path);
@@ -116,14 +120,14 @@ final class Client
             $this->reportSuccess();
         } catch (\Exception $ex) {
             $this->reportFailure();
-            throw new RuntimeException("Error while fetching from remote service.", $ex->getCode(), $ex);
+            throw new RuntimeException('Error while fetching from remote service.', $ex->getCode(), $ex);
         }
         $content = $response->getContent();
 
         return $content;
     }
 
-    public function get($path, array $data = array(), array $headers = array())
+    public function get($path, array $data = [], array $headers = [])
     {
         $this->zendClient->setMethod('GET')
                          ->setParameterGet($data);
@@ -131,7 +135,7 @@ final class Client
         return $this->doRequest($path, $headers);
     }
 
-    public function post($path, array $data, array $headers = array())
+    public function post($path, array $data, array $headers = [])
     {
         $this->zendClient->setMethod('POST')
                          ->setRawBody(json_encode($data));
@@ -139,7 +143,7 @@ final class Client
         return $this->doRequest($path, $headers);
     }
 
-    public function put($path, array $data, array $headers = array())
+    public function put($path, array $data, array $headers = [])
     {
         $this->zendClient->setMethod('PUT')
                          ->setRawBody(json_encode($data));
@@ -147,7 +151,7 @@ final class Client
         return $this->doRequest($path, $headers);
     }
 
-    public function patch($path, array $data, array $headers = array())
+    public function patch($path, array $data, array $headers = [])
     {
         $this->zendClient->setMethod('PATCH')
                          ->setRawBody(json_encode($data));
@@ -155,7 +159,7 @@ final class Client
         return $this->doRequest($path, $headers);
     }
 
-    public function delete($path, array $headers = array())
+    public function delete($path, array $headers = [])
     {
         $this->zendClient->setMethod('DELETE');
 
@@ -170,6 +174,7 @@ final class Client
     public function setDepth($depth)
     {
         $this->depth = (int) $depth;
+
         return $this;
     }
 
@@ -181,6 +186,7 @@ final class Client
     public function setCircuitBreaker(CerberusInterface $circuitBreaker)
     {
         $this->circuitBreaker = $circuitBreaker;
+
         return $this;
     }
 }

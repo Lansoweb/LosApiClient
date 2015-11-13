@@ -1,13 +1,12 @@
 <?php
+
 namespace LosApiClient\Api;
 
 use Zend\Http\Client;
 use Zend\Http\Response as ZendResponse;
-use Zend\Http\Header\HeaderValue;
 use Zend\Http\Headers;
 use LosApiClient\Exception\RuntimeException;
 use LosApiClient\Resource\Resource;
-use Nocarrier\HalJsonRenderer;
 use Nocarrier\Hal;
 
 /**
@@ -149,7 +148,6 @@ JSON;
         $content = $this->object->getContent();
         $this->assertInstanceOf(Resource::class, $content);
     }
-
 
     /**
      * @covers LosApiClient\Api\Response::__construct

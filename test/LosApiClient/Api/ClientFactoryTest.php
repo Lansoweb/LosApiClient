@@ -1,4 +1,5 @@
 <?php
+
 namespace LosApiClient\Api;
 
 use Zend\ServiceManager\ServiceManager;
@@ -6,9 +7,7 @@ use Zend\ServiceManager\Config;
 
 class ClientFactoryTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
-     *
      * @var ClientFactory
      */
     protected $object;
@@ -27,7 +26,8 @@ class ClientFactoryTest extends \PHPUnit_Framework_TestCase
      * This method is called after a test is executed.
      */
     protected function tearDown()
-    {}
+    {
+    }
 
     /**
      * @covers LosApiClient\Api\ClientFactory::createService
@@ -41,14 +41,14 @@ class ClientFactoryTest extends \PHPUnit_Framework_TestCase
                 'depth' => 0,
                 'headers' => [],
                 'http_client' => [
-                    'options' => []
+                    'options' => [],
                     // 'timeout' => 60,
                     // 'sslverifypeer' => false,
                     // 'keepalive' => true,
                     // 'adapter' => 'Zend\Http\Client\Adapter\Socket',
 
-                ]
-            ]
+                ],
+            ],
         ]);
         $client = $this->object->createService($sm);
         $this->assertInstanceOf(Client::class, $client);

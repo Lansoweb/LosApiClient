@@ -1,4 +1,5 @@
 <?php
+
 namespace LosApiClient\Api;
 
 use Cerberus\Cerberus;
@@ -29,7 +30,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         ->setMethods(['doRequest'])
         ->setConstructorArgs(['http://127.0.0.1', []])
         ->getMock();
-
+        // @codingStandardsIgnoreStart
         $response = <<<RESP
 HTTP/1.1 200 OK
 Date:  Fri, 13 Nov 2015 15:43:39 GMT
@@ -43,7 +44,7 @@ Content-Type:  application/hal+json
 
 {"_links":{"self":{"href":"http:\/\/127.0.0.1\/"},"first":{"href":"http:\/\/127.0.0.1"},"last":{"href":"http:\/\/127.0.0.1\u0026page=1"}},"_embedded":{"items":[{"id":1,"name":"name1"},{"id":2,"name":"name2"}]},"page_count":1,"page_size":25,"total_items":1,"page":1}
 RESP;
-
+        // @codingStandardsIgnoreEnd
         $client->method('doRequest')
         ->willReturn($response);
 
@@ -143,7 +144,7 @@ RESP;
      */
     public function testPost()
     {
-        $response = $this->object->post('/',[]);
+        $response = $this->object->post('/', []);
         $this->assertInstanceOf(Resource::class, $response);
     }
 
@@ -152,7 +153,7 @@ RESP;
      */
     public function testPut()
     {
-        $response = $this->object->put('/',[]);
+        $response = $this->object->put('/', []);
         $this->assertInstanceOf(Resource::class, $response);
     }
 
@@ -161,7 +162,7 @@ RESP;
      */
     public function testPatch()
     {
-        $response = $this->object->patch('/',[]);
+        $response = $this->object->patch('/', []);
         $this->assertInstanceOf(Resource::class, $response);
     }
 
