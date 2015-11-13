@@ -15,7 +15,7 @@
     "mt-olympus/cerberus" : "dev-master",
     "phpunit/phpunit" : "~5.0"
   },
-  "license" : "BSD-3-Clause",
+  "license" : "MIT",
   "keywords" : [ "api", "rest", "client", "zf2", "hal" ],
   "autoload" : {
     "psr-4" : {
