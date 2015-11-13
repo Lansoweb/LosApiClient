@@ -70,12 +70,8 @@ final class Client
 
         $zendHttpResponse = $this->zendClient->send();
 
-        try {
-            $response = new Response($this->zendClient, $zendHttpResponse, $this->depth);
-            $content = $response->getContent();
-        } catch (ZendHttpRuntimeException $e) {
-	    throw $e;
-        }
+        $response = new Response($this->zendClient, $zendHttpResponse, $this->depth);
+        $content = $response->getContent();
 
         return $content;
     }

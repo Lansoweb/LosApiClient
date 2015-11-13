@@ -45,6 +45,10 @@ final class Response
             throw new RuntimeException(sprintf('Error "%s/%s": %s', $error->status, $error->title, $error->detail));
         }
 
+        if (!$this->httpResponse->getHeaders()->has('Content-Type')) {
+            throw new RuntimeException("Missing 'Content-Type' header.");
+        }
+
         $contentType = $this->httpResponse->getHeaders()
             ->get('Content-Type')
             ->getFieldValue();
