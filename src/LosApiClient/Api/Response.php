@@ -38,6 +38,12 @@ final class Response
 
         if (!$this->httpResponse->isSuccess()) {
             $error = json_decode($this->httpResponse->getBody());
+            if (empty($error)) {
+                $error = new \stdClass();
+                $error->status = $this->httpResponse->getStatusCode();
+                $error->title = $this->httpResponse->getReasonPhrase();
+                $error->detail = '';
+            }
 
             throw new RuntimeException(sprintf('Error "%s/%s": %s', $error->status, $error->title, $error->detail));
         }
@@ -59,6 +65,8 @@ final class Response
             $this->content = new Resource(Hal::fromJson($this->httpResponse->getBody(), $depth));
         } elseif ($contentType == 'application/hal+xml' || $contentType == 'application/xml') {
             $this->content = new Resource(Hal::fromXml($this->httpResponse->getBody(), $depth));
+        } elseif (empty($this->httpResponse->getBody())) {
+            $this->content = null;
         } else {
             throw new RuntimeException("Invalid content type during for response: $contentType.");
         }

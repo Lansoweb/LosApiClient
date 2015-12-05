@@ -70,6 +70,11 @@ final class Client
         return $this->zendClient;
     }
 
+    public function getResponse()
+    {
+        return $this->zendClient->getResponse();
+    }
+
     private function isAvailable()
     {
         if ($this->circuitBreaker === null) {
@@ -118,6 +123,9 @@ final class Client
 
             $response = new Response($this->zendClient, $zendHttpResponse, $this->depth);
             $this->reportSuccess();
+        } catch (RuntimeException $ex) {
+            $this->reportFailure();
+            throw new RuntimeException('Error while fetching from remote service: '. $ex->getMessage(), $ex->getCode(), $ex);
         } catch (\Exception $ex) {
             $this->reportFailure();
             throw new RuntimeException('Error while fetching from remote service.', $ex->getCode(), $ex);
