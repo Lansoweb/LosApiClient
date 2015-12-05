@@ -45,11 +45,11 @@ final class Response
                 $error->detail = '';
             }
 
-            throw new RuntimeException(sprintf('Error "%s/%s": %s', $error->status, $error->title, $error->detail));
+            throw new RuntimeException($error->detail, $error->status);
         }
 
         if (!$this->httpResponse->getHeaders()->has('Content-Type')) {
-            throw new RuntimeException("Missing 'Content-Type' header.");
+            throw new RuntimeException("Missing 'Content-Type' header.", 500);
         }
 
         $contentType = $this->httpResponse->getHeaders()
@@ -68,7 +68,7 @@ final class Response
         } elseif (empty($this->httpResponse->getBody())) {
             $this->content = null;
         } else {
-            throw new RuntimeException("Invalid content type during for response: $contentType.");
+            throw new RuntimeException("Invalid content type during for response: $contentType.", 500);
         }
     }
 

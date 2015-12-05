@@ -125,10 +125,10 @@ final class Client
             $this->reportSuccess();
         } catch (RuntimeException $ex) {
             $this->reportFailure();
-            throw new RuntimeException('Error while fetching from remote service: '. $ex->getMessage(), $ex->getCode(), $ex);
+            throw new RuntimeException($ex->getMessage(), $ex->getCode(), $ex);
         } catch (\Exception $ex) {
             $this->reportFailure();
-            throw new RuntimeException('Error while fetching from remote service.', $ex->getCode(), $ex);
+            throw new RuntimeException($ex->getCode(), $ex);
         }
         $content = $response->getContent();
 
