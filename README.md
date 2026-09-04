@@ -1,5 +1,11 @@
 # Api Client for Restful API
 
+> [!WARNING]
+> ## Archived
+> This legacy HAL API client is no longer maintained and will receive no
+> further releases. Use a maintained HTTP client and an explicit current API
+> representation for new integrations.
+
 [![Build Status](https://travis-ci.org/lansoweb/los-api-client.svg?branch=master)](https://travis-ci.org/lansoweb/los-api-client)
 
 LosApiClient is a library to consume Restful APIs using Hal (json or xml) like [Apigility](http://apigility.org).
